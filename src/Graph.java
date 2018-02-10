@@ -21,10 +21,9 @@ public class Graph {
     }
 
     private Edge[] representationToArray() {
+
         Edge[] edgeArray = new Edge[representation.size()];
-        for (int i = 0; i < representation.size(); i++) {
-            edgeArray[i]  = representation.get(i);
-        }
+        for (int i = 0; i < representation.size(); i++) edgeArray[i]  = representation.get(i);
         return edgeArray;
     }
 
