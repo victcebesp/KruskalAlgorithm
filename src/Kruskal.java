@@ -10,31 +10,36 @@ public class Kruskal {
     }
 
     public List<Edge> kruskalAlgorithm(Graph graph) {
+
         Edge[] edgeArray = graph.getEdgeArray();
         sorter.sort(edgeArray);
 
         int index = 0;
         int size = graph.vertexAmount();
+        int SPANNING_TREE_SIZE = size - 1;
 
-        List<Edge> minimalExpansionTree = new ArrayList<>();
+        List<Edge> minimalSpanningTree = new ArrayList<>();
 
-        if (size == 0) return minimalExpansionTree;
+        if (isEmpty(size)) return minimalSpanningTree;
 
         int[] disjointSet = new int[size];
         initialize(disjointSet);
 
         do {
-            Edge edge = edgeArray[index];
-            index++;
+            Edge edge = edgeArray[index++];
             int firstVertexSet = find(edge.getInitialVertex(), disjointSet);
             int secondVertexSet = find(edge.getFinalVertex(), disjointSet);
-            if (firstVertexSet != secondVertexSet) {
+            if (vertexSetsAreDifferent(firstVertexSet, secondVertexSet)) {
                 union(firstVertexSet, secondVertexSet, disjointSet);
-                minimalExpansionTree.add(edge);
+                minimalSpanningTree.add(edge);
             }
-        } while (minimalExpansionTree.size() != size-1);
+        } while (minimalSpanningTree.size() != SPANNING_TREE_SIZE);
 
-        return minimalExpansionTree;
+        return minimalSpanningTree;
+    }
+
+    private boolean isEmpty(int size) {
+        return size == 0;
     }
 
     private void initialize(int[] disjointSet){
@@ -48,6 +53,10 @@ public class Kruskal {
             aux = disjointSet[aux];
 
         return aux;
+    }
+
+    private boolean vertexSetsAreDifferent(int firstVertexSet, int secondVertexSet) {
+        return firstVertexSet != secondVertexSet;
     }
 
     private void union(int firstVertex, int secondVertex, int[] disjointSet){
