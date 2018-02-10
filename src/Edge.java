@@ -1,25 +1,42 @@
-public class Edge {
-    private final int cost;
-    private final int vertex;
+import java.util.Objects;
 
-    public Edge(int cost, int vertex) {
+public class Edge {
+    private int cost;
+    private final int initialVertex;
+    private final int finalVertex;
+
+    public Edge(int initialVertex, int finalVertex, int cost) {
+        this.initialVertex = initialVertex;
+        this.finalVertex = finalVertex;
         this.cost = cost;
-        this.vertex = vertex;
     }
 
     public int getCost() {
         return cost;
     }
 
-    public int getVertex() {
-        return vertex;
+    public int getInitialVertex() {
+        return initialVertex;
+    }
+
+    public int getFinalVertex() {
+        return finalVertex;
     }
 
     @Override
     public String toString() {
         return "Edge{" +
                 "cost=" + cost +
-                ", vertex=" + vertex +
+                ", initialVertex=" + initialVertex +
+                ", finalVertex=" + finalVertex +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Edge edge = (Edge) o;
+        return edge.getCost() == this.getCost() &&
+                edge.getInitialVertex() == this.getInitialVertex() &&
+                edge.getFinalVertex() == this.getFinalVertex();
     }
 }

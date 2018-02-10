@@ -1,25 +1,31 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
 
+    private final Edge[] edgeArray;
     private int vertexAmount;
-    private List<List<Edge>> representation;
-    private Edge[] edgesArray;
-    private Edge[] edges;
+    private List<Edge> representation;
 
-    public Graph(List<List<Edge>> representation) {
+    public Graph(List<Edge> representation, int vertexAmount) {
         this.representation = representation;
-        this.vertexAmount = representation.size();
-        edgesArray = obtainEdges();
+        this.vertexAmount = vertexAmount;
+        this.edgeArray = representationToArray();
     }
 
-    public void addVertex(int origin, int target, int cost){
-        representation.get(origin).add(new Edge(cost, target));
+    public int vertexAmount() {
+        return vertexAmount;
     }
 
-    public Edge[] getEdges() {
-        return edges;
+    public Edge[] getEdgeArray() {
+        return edgeArray;
+    }
+
+    private Edge[] representationToArray() {
+        Edge[] edgeArray = new Edge[representation.size()];
+        for (int i = 0; i < representation.size(); i++) {
+            edgeArray[i]  = representation.get(i);
+        }
+        return edgeArray;
     }
 
     @Override
@@ -30,13 +36,4 @@ public class Graph {
                 '}';
     }
 
-    private Edge[] obtainEdges() {
-        List<Edge> edgeList = new ArrayList<>();
-        for (List<Edge> each : representation) {
-            for (Edge edge : each) {
-                edgeList.add(edge);
-            }
-        }
-        return (Edge[]) edgeList.toArray();
-    }
 }
