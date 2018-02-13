@@ -4,8 +4,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Sorter sorter = new Sorter();
-        Kruskal kruskal = new Kruskal(sorter);
+        Kruskal kruskal = new Kruskal();
         List<Edge> edgeList = Arrays.asList(new Edge(0, 1, 1),
                                             new Edge(0, 3, 4),
                                             new Edge(0, 4, 6),
