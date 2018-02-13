@@ -1,6 +1,4 @@
-import java.util.Objects;
-
-public class Edge {
+public class Edge implements Comparable{
     private int cost;
     private final int initialVertex;
     private final int finalVertex;
@@ -38,5 +36,11 @@ public class Edge {
         return edge.getCost() == this.getCost() &&
                 edge.getInitialVertex() == this.getInitialVertex() &&
                 edge.getFinalVertex() == this.getFinalVertex();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Edge edge = (Edge) o;
+        return Integer.compare(this.getCost(), edge.getCost());
     }
 }

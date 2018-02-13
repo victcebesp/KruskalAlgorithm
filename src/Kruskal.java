@@ -1,18 +1,17 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Kruskal {
 
-    private final Sorter sorter;
-
-    public Kruskal(Sorter sorter) {
-        this.sorter = sorter;
-    }
 
     public List<Edge> kruskalAlgorithm(Graph graph) {
 
         Edge[] edgeArray = graph.getEdgeArray();
-        sorter.sort(edgeArray);
+        List<Edge> edgeList = Arrays.asList(edgeArray);
+        Collections.sort(edgeList);
+        edgeArray = (Edge[]) edgeList.toArray();
 
         int index = 0;
         int size = graph.vertexAmount();
@@ -44,12 +43,12 @@ public class Kruskal {
 
     private void initialize(int[] disjointSet){
         for (int i = 0; i < disjointSet.length; i++)
-            disjointSet[i]  = 0;
+            disjointSet[i]  = -1;
     }
 
     private int find(int vertex, int[] disjointSet){
         int aux = vertex;
-        while(disjointSet[aux] > 0)
+        while(disjointSet[aux] > -1)
             aux = disjointSet[aux];
 
         return aux;
