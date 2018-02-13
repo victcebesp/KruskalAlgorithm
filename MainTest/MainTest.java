@@ -7,6 +7,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MainTest {
 
@@ -78,10 +79,12 @@ public class MainTest {
 
         Graph graph = new Graph(new ArrayList<>(), 0);
 
-        Kruskal kruskal = new Kruskal(new Sorter());
+        Kruskal kruskal = new Kruskal();
         List <Edge> spanning_tree = new ArrayList<>();
 
         assertThat(kruskal.kruskalAlgorithm(graph), is(spanning_tree));
+
+        assertTrue(spanning_tree.size() == 0);
     }
 
     @Test
@@ -92,23 +95,25 @@ public class MainTest {
         List<Edge> edgeList = Arrays.asList(edge);
         Graph graph = new Graph(edgeList, 1);
 
-        Kruskal kruskal = new Kruskal(new Sorter());
-        List <Edge> spanning_tree = Arrays.asList();
+        Kruskal kruskal = new Kruskal();
+        List <Edge> spanning_tree = new ArrayList<>();
 
         assertThat(kruskal.kruskalAlgorithm(graph), is(spanning_tree));
+
+
     }
 
     @Test
     public void return_spanning_tree_from_two_edge_graph(){
 
         Edge edge1 = new Edge(0, 1, 1);
-        Edge edge2 = new Edge(1, 0, 2);
+        Edge edge2 = new Edge(0, 2, 2);
 
         List<Edge> edgeList = Arrays.asList(edge1, edge2);
-        Graph graph = new Graph(edgeList, 2);
+        Graph graph = new Graph(edgeList, 3);
 
-        Kruskal kruskal = new Kruskal(new Sorter());
-        List <Edge> spanning_tree = Arrays.asList(edge1);
+        Kruskal kruskal = new Kruskal();
+        List <Edge> spanning_tree = Arrays.asList(edge1, edge2);
 
         assertThat(kruskal.kruskalAlgorithm(graph), is(spanning_tree));
     }
@@ -134,10 +139,12 @@ public class MainTest {
 
         Graph graph = new Graph(edgeList, 7);
 
-        Kruskal kruskal = new Kruskal(new Sorter());
-        List <Edge> spanning_tree = Arrays.asList(edge1, edge4, edge13, edge9, edge10, edge8);
+        Kruskal kruskal = new Kruskal();
+        List <Edge> spanning_tree = Arrays.asList(edge1, edge4, edge9, edge13, edge2, edge8);
 
         assertThat(kruskal.kruskalAlgorithm(graph), is(spanning_tree));
     }
+
+
 
 }
